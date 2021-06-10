@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Image, View, Text, Dimensions, TouchableOpacity } from "react-native";
 import SkeletonContent from "react-native-skeleton-content";
 import { getPokemon } from "network/pokemons";
-import { TPokemon } from "redux/pokemon";
+import { TPokemon } from "models/pokemon";
 import styles from "./styles";
 import { BoxShadow } from "react-native-shadow";
 import * as Animatable from "react-native-animatable";

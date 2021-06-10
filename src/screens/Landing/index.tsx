@@ -10,18 +10,10 @@ const Landing = () => {
   const [timesUp, setTimesUp] = useState(false);
   let [fontsLoaded] = useFonts({
     "Pokemon-Solid": require("@fonts/Pokemon-Solid.ttf"),
-    "Pokemon-Hollow": require("@fonts/Pokemon-Hollow.ttf"),
 
     "Poppins-Black": require("@fonts/Poppins-Black.ttf"),
     "Poppins-Bold": require("@fonts/Poppins-Bold.ttf"),
-    "Poppins-ExtraBold": require("@fonts/Poppins-ExtraBold.ttf"),
-    "Poppins-ExtraLight": require("@fonts/Poppins-ExtraLight.ttf"),
     "Poppins-Light": require("@fonts/Poppins-Light.ttf"),
-    "Poppins-Italic": require("@fonts/Poppins-Italic.ttf"),
-    "Poppins-Medium": require("@fonts/Poppins-Medium.ttf"),
-    "Poppins-Regular": require("@fonts/Poppins-Regular.ttf"),
-    "Poppins-SemiBold": require("@fonts/Poppins-SemiBold.ttf"),
-    "Poppins-Thin": require("@fonts/Poppins-Thin.ttf"),
   });
 
   const runTimer = () => setTimeout(() => setTimesUp(true), 1500);
