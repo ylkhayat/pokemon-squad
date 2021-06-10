@@ -42,7 +42,11 @@ const PokemonCard = ({ pokemon, index }: Props) => {
   }, [profile.url]);
 
   const onPress = useCallback(
-    () => navigate("single_pokemon", { pokemon: profile }),
+    () =>
+      navigate("single_pokemon", {
+        pokemon: profile,
+        pokemonColor: Object.values(backgroundColors)[index % 5],
+      }),
     [profile]
   );
 
@@ -67,7 +71,7 @@ const PokemonCard = ({ pokemon, index }: Props) => {
             ]}
           >
             <Animatable.View
-              animation={index % 2 === 0 ? "slideInRight" : "slideInLeft"}
+              animation={index % 2 === 0 ? "fadeInRight" : "fadeInLeft"}
               delay={500 * index}
               useNativeDriver
               style={[

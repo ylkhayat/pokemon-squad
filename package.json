@@ -27,6 +27,7 @@
     "react-native-reanimated": "~2.1.0",
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.0.0",
+    "react-native-search-box": "^0.0.20",
     "react-native-shadow": "^1.2.2",
     "react-native-skeleton-content": "^1.0.22",
     "react-native-snap-carousel": "^3.9.1",

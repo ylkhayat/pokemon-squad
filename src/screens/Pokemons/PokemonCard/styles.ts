@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     letterSpacing: 2,
     fontSize: 20,
     fontFamily: "Pokemon-Solid",
-    color: colors.darkmaron,
+    color: "black",
   },
   imageStyle: {
     flex: 1,

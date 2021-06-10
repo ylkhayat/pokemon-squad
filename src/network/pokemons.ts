@@ -5,3 +5,6 @@ export const getPokemons = (config?: AxiosRequestConfig): any =>
 
 export const getPokemon = (url: string, config?: AxiosRequestConfig): any =>
   axios(url, config);
+
+export const getPokemonByName = (name: string): any =>
+  axios.get(`pokemon/${name}`);

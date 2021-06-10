@@ -1,36 +1,41 @@
-import { StyleSheet } from "react-native";
-import colors from "../../styles/palette";
+import { StyleSheet, Dimensions } from "react-native";
+import colors, { backgroundColors } from "../../styles/palette";
 
+const { width, height } = Dimensions.get("window");
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.blueciel,
+    backgroundColor: colors.white,
+  },
+  imageContainer: {
+    width: "90%",
+    alignSelf: "center",
+    borderRadius: 15,
+    marginVertical: 10,
+    flex: 1,
   },
   imageStyle: {
-    height: 300,
-    width: "100%",
+    flex: 1,
   },
   swiperImageStyle: {
     height: 200,
     width: "100%",
   },
   content1Style: {
-    width: "90%",
-    backgroundColor: colors.secondary,
+    width: "70%",
     padding: 10,
-    margin: 15,
     borderRadius: 10,
-    alignSelf: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   content2Style: {
-    width: "60%",
-    backgroundColor: colors.secondary,
+    justifyContent: "space-between",
+    width: "70%",
     padding: 10,
-    margin: 15,
     borderRadius: 10,
   },
-  specyContainerStyle: {
-    backgroundColor: colors.primary,
+  specieContainerStyle: {
+    backgroundColor: backgroundColors[1],
     paddingHorizontal: 8,
     paddingVertical: 5,
     borderRadius: 8,
@@ -38,15 +43,15 @@ const styles = StyleSheet.create({
 
   typeContainerStyle: {
     marginRight: 8,
-    backgroundColor: colors.darkmaron,
+    backgroundColor: backgroundColors[2],
     paddingHorizontal: 8,
     paddingVertical: 5,
     borderRadius: 8,
   },
   headerTextStyle: {
     fontSize: 20,
-    fontFamily: "Poppins-SemiBold",
-    color: colors.white,
+    fontFamily: "Poppins-Bold",
+    color: backgroundColors[1],
   },
   valueTextStyle: {
     fontSize: 16,
