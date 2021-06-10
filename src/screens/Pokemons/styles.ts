@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 30,
     fontFamily: "Poppins-Bold",
-    color: "black",
+    color: colors.green,
     width: "60%",
   },
   imageStyle: {

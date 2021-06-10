@@ -5,6 +5,7 @@ import { getPokemons, getPokemonByName } from "../../network/pokemons";
 import PokemonCard from "./PokemonCard";
 import styles from "./styles";
 import Search from "react-native-search-box";
+import colors from "../../styles/palette";
 
 const _keyExtractor = (_, index: any) => `pokemon_${index}`;
 const _renderItem = ({ item, index }: any) => {
@@ -30,15 +31,19 @@ const Pokemons = () => {
   }, [page]);
 
   const retrievePokemons = useCallback(async () => {
-    setRefreshing(true);
-    const { data } = await getPokemons({
-      params: { limit, offset: limit * page },
-    });
-    const { results } = data || {};
-
-    setPage((prevPage) => prevPage + 1);
-    setRefreshing(false);
-    if (results) setPokemons((prevPokemons) => [...prevPokemons, ...results]);
+    try {
+      setRefreshing(true);
+      const { data } = await getPokemons({
+        params: { limit, offset: limit * page },
+      });
+      const { results } = data || {};
+      setPage((prevPage) => prevPage + 1);
+      setRefreshing(false);
+      if (results) setPokemons((prevPokemons) => [...prevPokemons, ...results]);
+    } catch (e) {
+      setPokemons([]);
+      setRefreshing(false);
+    }
   }, [page]);
 
   useEffect(() => {
@@ -78,6 +83,7 @@ const Pokemons = () => {
         onChangeText={setSearch}
         onCancel={onDeleteCancel}
         onDelete={onDeleteCancel}
+        backgroundColor={colors.secondary}
       />
       <FlatList
         refreshing={refreshing}
@@ -88,7 +94,7 @@ const Pokemons = () => {
         initialNumToRender={10}
         maxToRenderPerBatch={5}
         onEndReachedThreshold={0.1}
-        // onEndReached={retrievePokemons}
+        onEndReached={retrievePokemons}
         style={{ width: "100%" }}
       />
     </SafeAreaView>

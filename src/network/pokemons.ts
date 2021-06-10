@@ -8,3 +8,9 @@ export const getPokemon = (url: string, config?: AxiosRequestConfig): any =>
 
 export const getPokemonByName = (name: string): any =>
   axios.get(`pokemon/${name}`);
+
+export const getPokemonAudio = (id: string) =>
+  axios(`https://pokemoncries.com/cries-old/${id}.mp3`);
+
+export const getPokemonAudioUri = (id: string) =>
+  `https://pokemoncries.com/cries-old/${id}.mp3`;

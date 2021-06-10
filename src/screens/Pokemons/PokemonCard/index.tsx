@@ -17,7 +17,7 @@ type Props = {
 };
 
 const shadowOpt = {
-  width: width * 0.8,
+  width: width * 0.9,
   height: 200,
   color: colors.darkmaron,
   border: 2,
@@ -36,9 +36,13 @@ const PokemonCard = ({ pokemon, index }: Props) => {
   const [loading, setLoading] = useState(true);
 
   const retrieveProfile = useCallback(async () => {
-    const { data } = await getPokemon(profile.url);
-    setProfile((prevProfile) => ({ ...prevProfile, ...data }));
-    setLoading(false);
+    try {
+      const { data } = await getPokemon(profile.url);
+      setProfile((prevProfile) => ({ ...prevProfile, ...data }));
+      setLoading(false);
+    } catch (e) {
+      setLoading(false);
+    }
   }, [profile.url]);
 
   const onPress = useCallback(
@@ -72,7 +76,6 @@ const PokemonCard = ({ pokemon, index }: Props) => {
           >
             <Animatable.View
               animation={index % 2 === 0 ? "fadeInRight" : "fadeInLeft"}
-              delay={500 * index}
               useNativeDriver
               style={[
                 styles.nameContainerStyle,
