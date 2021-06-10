@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
   specieContainerStyle: {
     backgroundColor: backgroundColors[1],
     paddingHorizontal: 8,
+    marginLeft: 4,
     paddingVertical: 5,
     borderRadius: 8,
   },

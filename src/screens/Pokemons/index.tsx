@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Text, View, FlatList, ListRenderItem } from "react-native";
+import { Text, View, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { getPokemons, getPokemonByName } from "../../network/pokemons";
+import { getPokemons, getPokemonByName } from "network/pokemons";
 import PokemonCard from "./PokemonCard";
 import styles from "./styles";
 import Search from "react-native-search-box";
-import colors from "../../styles/palette";
+import colors from "styles/palette";
 
-const _keyExtractor = (_, index: any) => `pokemon_${index}`;
+const _keyExtractor = ({ id }: any, index: any) => `pokemon_${id}_${index}`;
 const _renderItem = ({ item, index }: any) => {
   return <PokemonCard index={index} pokemon={item} />;
 };
@@ -19,6 +19,7 @@ const Pokemons = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
+
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
     const { data } = await getPokemons({
@@ -31,6 +32,7 @@ const Pokemons = () => {
   }, [page]);
 
   const retrievePokemons = useCallback(async () => {
+    if (search) return;
     try {
       setRefreshing(true);
       const { data } = await getPokemons({
@@ -44,25 +46,28 @@ const Pokemons = () => {
       setPokemons([]);
       setRefreshing(false);
     }
-  }, [page]);
+  }, [page, search]);
 
   useEffect(() => {
+    console.log("HEY");
+
     retrievePokemons();
   }, []);
 
   const onDeleteCancel = useCallback(() => {
+    console.log("HEYEH");
+
     setSearch("");
     onRefresh();
   }, []);
 
   const onSearch = useCallback((searchText: string) => {
     setRefreshing(true);
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async () => {
       try {
         const { data } = await getPokemonByName(searchText);
         setRefreshing(false);
         setPokemons([data]);
-        resolve(data);
       } catch (e) {
         setPokemons([]);
         setRefreshing(false);
@@ -78,6 +83,7 @@ const Pokemons = () => {
         </View>
       </View>
       <Search
+        value={search}
         ref={searchBarRef}
         onSearch={onSearch}
         onChangeText={setSearch}

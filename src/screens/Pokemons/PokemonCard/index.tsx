@@ -1,23 +1,23 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Image, View, Text, Dimensions, TouchableOpacity } from "react-native";
 import SkeletonContent from "react-native-skeleton-content";
-import { getPokemon } from "../../../network/pokemons";
-import { TPokemon } from "../../../redux/pokemon";
+import { getPokemon } from "network/pokemons";
+import { TPokemon } from "redux/pokemon";
 import styles from "./styles";
 import { BoxShadow } from "react-native-shadow";
 import * as Animatable from "react-native-animatable";
-import { capitalizeFirstLetter } from "../../../utils";
-import { navigate } from "../../../navigation/RootNavigation";
-import colors, { backgroundColors } from "../../../styles/palette";
+import { capitalizeFirstLetter } from "utils";
+import { navigate } from "navigation/RootNavigation";
+import colors, { backgroundColors } from "styles/palette";
+import { width } from "styles/mixins";
 
-const { width } = Dimensions.get("window");
 type Props = {
   index: number;
   pokemon: TPokemon;
 };
 
 const shadowOpt = {
-  width: width * 0.9,
+  width: width(90),
   height: 200,
   color: colors.darkmaron,
   border: 2,
