@@ -21,14 +21,19 @@ const Pokemons = () => {
   const [search, setSearch] = useState("");
 
   const onRefresh = useCallback(async () => {
-    setRefreshing(true);
-    const { data } = await getPokemons({
-      params: { limit },
-    });
-    const { results } = data || {};
-    setPage(2);
-    setRefreshing(false);
-    if (results) setPokemons(results);
+    try {
+      setRefreshing(true);
+      const { data } = await getPokemons({
+        params: { limit },
+      });
+      const { results } = data || {};
+      setPage(2);
+      setRefreshing(false);
+      if (results) setPokemons(results);
+    } catch (e) {
+      setPokemons([]);
+      setRefreshing(false);
+    }
   }, [page]);
 
   const retrievePokemons = useCallback(async () => {
@@ -48,15 +53,7 @@ const Pokemons = () => {
     }
   }, [page, search]);
 
-  useEffect(() => {
-    console.log("HEY");
-
-    retrievePokemons();
-  }, []);
-
   const onDeleteCancel = useCallback(() => {
-    console.log("HEYEH");
-
     setSearch("");
     onRefresh();
   }, []);
@@ -73,6 +70,10 @@ const Pokemons = () => {
         setRefreshing(false);
       }
     });
+  }, []);
+
+  useEffect(() => {
+    retrievePokemons();
   }, []);
 
   return (
@@ -101,7 +102,6 @@ const Pokemons = () => {
         maxToRenderPerBatch={5}
         onEndReachedThreshold={0.1}
         onEndReached={retrievePokemons}
-        style={{ width: "100%" }}
       />
     </SafeAreaView>
   );

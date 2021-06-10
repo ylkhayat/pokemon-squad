@@ -16,7 +16,7 @@ const Landing = () => {
     "Poppins-Light": require("@fonts/Poppins-Light.ttf"),
   });
 
-  const runTimer = () => setTimeout(() => setTimesUp(true), 1500);
+  const runTimer = () => setTimeout(() => setTimesUp(true), 2000);
 
   useEffect(() => {
     runTimer();

@@ -7,12 +7,25 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
+  headerContainer: {
+    paddingVertical: 7,
+    paddingHorizontal: 12,
+  },
   imageContainer: {
     width: "90%",
     alignSelf: "center",
     borderRadius: 15,
     marginVertical: 10,
     flex: 1,
+  },
+  nameTextStyle: {
+    position: "absolute",
+    top: 0,
+    letterSpacing: 2.5,
+    fontSize: 30,
+    fontFamily: "Pokemon-Solid",
+    color: colors.white,
+    alignSelf: "center",
   },
   imageStyle: {
     flex: 1,

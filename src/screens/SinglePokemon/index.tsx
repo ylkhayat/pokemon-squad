@@ -10,28 +10,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "./styles";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "styles/palette";
-import { goBack } from "navigation/RootNavigation";
+
 import { Audio } from "expo-av";
 import { getPokemonOldAudioUri, getPokemonNewAudioUri } from "network/pokemons";
-
-const Header = () => {
-  return (
-    <View
-      style={{
-        paddingVertical: 7,
-        paddingHorizontal: 12,
-      }}
-    >
-      <TouchableWithoutFeedback onPress={goBack}>
-        <Ionicons
-          name="arrow-back-circle-outline"
-          color={colors.primary}
-          size={50}
-        />
-      </TouchableWithoutFeedback>
-    </View>
-  );
-};
+import Header from "./Header";
+import { capitalizeFirstLetter } from "utils";
 
 type Props = {
   route: any;
@@ -83,6 +66,9 @@ const SinglePokemon = ({ route }: Props) => {
         <View
           style={[styles.imageContainer, { backgroundColor: pokemonColor }]}
         >
+          <Text style={styles.nameTextStyle}>
+            {capitalizeFirstLetter(pokemon.name)}
+          </Text>
           <Image
             source={{ uri: pokemon?.sprites?.front_default }}
             resizeMode="contain"
