@@ -13,7 +13,7 @@ export const backgroundColors = [
   "#17DEEE",
   "#FF7F50",
   "#FF4162",
-  "#F2E50B",
+  "#F28900",
   "#21B20C",
 ];
 

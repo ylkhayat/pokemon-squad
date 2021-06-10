@@ -72,6 +72,28 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins-Light",
     color: colors.white,
   },
+  detailsTextStyle: {
+    fontSize: 16,
+    fontFamily: "Poppins-Bold",
+    color: colors.white,
+  },
+
+  oldAudioContainer: {
+    position: "absolute",
+    bottom: 5,
+    left: 5,
+    backgroundColor: colors.white,
+    borderRadius: 7,
+    padding: 7,
+  },
+  newAudioContainer: {
+    position: "absolute",
+    bottom: 5,
+    right: 5,
+    backgroundColor: colors.white,
+    borderRadius: 7,
+    padding: 7,
+  },
 });
 
 export default styles;

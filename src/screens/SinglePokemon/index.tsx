@@ -75,22 +75,26 @@ const SinglePokemon = ({ route }: Props) => {
             style={styles.imageStyle}
           />
           <TouchableWithoutFeedback onPress={onPlayOldSound} disabled={loading}>
-            <View style={{ position: "absolute", bottom: 5, left: 5 }}>
-              <Text style={styles.valueTextStyle}>Old</Text>
+            <View style={styles.oldAudioContainer}>
+              <Text style={[styles.detailsTextStyle, { color: pokemonColor }]}>
+                Old
+              </Text>
               {loading ? (
-                <ActivityIndicator color={colors.white} size={40} />
+                <ActivityIndicator color={pokemonColor} size={40} />
               ) : (
-                <Ionicons name={"play"} color={colors.white} size={40} />
+                <Ionicons name={"play"} color={pokemonColor} size={40} />
               )}
             </View>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback onPress={onPlayNewSound} disabled={loading}>
-            <View style={{ position: "absolute", bottom: 5, right: 5 }}>
-              <Text style={styles.valueTextStyle}>New</Text>
+            <View style={styles.newAudioContainer}>
+              <Text style={[styles.detailsTextStyle, { color: pokemonColor }]}>
+                New
+              </Text>
               {loading ? (
-                <ActivityIndicator color={colors.white} size={40} />
+                <ActivityIndicator color={pokemonColor} size={40} />
               ) : (
-                <Ionicons name={"play"} color={colors.white} size={40} />
+                <Ionicons name={"play"} color={pokemonColor} size={40} />
               )}
             </View>
           </TouchableWithoutFeedback>
