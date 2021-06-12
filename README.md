@@ -32,8 +32,25 @@ $ expo start
 
 The application is pretty simple. Once you're in, a small loading will take place to start loading the local assets. Wait up to 2000 ms (2 seconds). (This is manually put 😅)
 
-Proceeding, you will receive a list of Pokemons, with a very interesting [`SearchBar`](https://github.com/react-native-vietnam/react-native-search-box) for filtering the output. It only supports full pokemon names, substrings are not yet supported.
+#### 👀 Searching now available
 
-Upon clicking on any pokemon you like, you will be redirected to a page where additional info is displayed about the Pokemon. And as a bonus, I included the Pokemon's cry, both old and new.
+Proceeding, you will receive a list of Pokemons, with a very interesting [`Autocomplete`](https://github.com/mrlaessig/react-native-autocomplete-input) for filtering the output and as the database we used this awesome package [`Pokemon`](https://github.com/sindresorhus/pokemon).
 
-Cheers!
+- Just type anything into the search box
+- Results will come running
+- Enjoy your queried okemon
+
+#### 📑 Pokemon Content
+
+Upon clicking on any pokemon you like, you will be redirected to a page where additional info is displayed about the Pokemon.
+
+And as a bonus, you will find included the Pokemon's cry, both old and new through this gem API
+
+- Old - `https://pokemoncries.com/cries-old/{{id}}.mp3`
+- New - `https://pokemoncries.com/cries/{{id}}.mp3`
+
+### 🧪 Tests
+
+Tests for this application will be included soon.
+
+Cheers! 🍻
