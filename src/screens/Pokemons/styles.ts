@@ -17,6 +17,9 @@ const styles = StyleSheet.create({
     flex: 1,
     height: "100%",
   },
+  autocompleteListContainer: {
+    height: height(20),
+  },
   autocompleteContainer: {
     zIndex: 5,
     height: height(20),

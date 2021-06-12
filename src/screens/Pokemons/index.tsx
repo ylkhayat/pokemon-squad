@@ -114,6 +114,7 @@ const Pokemons = () => {
             value={search}
             onChangeText={setSearch}
             flatListProps={FLATLIST_PROPS as any}
+            listContainerStyle={styles.autocompleteListContainer}
             renderTextInput={(props: any) => (
               <View style={styles.textInputContainer}>
                 <TextInput
@@ -122,11 +123,12 @@ const Pokemons = () => {
                   style={styles.textInputStyle}
                   onFocus={() => setSearchFocused(true)}
                 />
-                {!!search && (
+
+                {(!!search || searchFocused) && (
                   <TouchableOpacity onPress={onDeleteCancel}>
                     <Ionicons
                       name="close-circle"
-                      size={20}
+                      size={25}
                       color={colors.primary}
                     />
                   </TouchableOpacity>

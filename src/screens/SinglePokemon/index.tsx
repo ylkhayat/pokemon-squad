@@ -10,7 +10,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "./styles";
 import { Ionicons } from "@expo/vector-icons";
-
+import * as Animatable from "react-native-animatable";
 import { Audio } from "expo-av";
 import { getPokemonOldAudioUri, getPokemonNewAudioUri } from "network/pokemons";
 import Header from "./Header";
@@ -115,15 +115,21 @@ const SinglePokemon = ({ route }: Props) => {
           <Text style={styles.headerTextStyle}>Pokemon Stats</Text>
 
           <FlatList
+            keyExtractor={(item) => item.stat.name}
             data={pokemon.stats}
             numColumns={2}
             renderItem={({ item, index }) => (
-              <View key={item.stat.name} style={styles.statContainer}>
+              <Animatable.View
+                animation="bounceIn"
+                delay={100 * index}
+                useNativeDriver
+                style={styles.statContainer}
+              >
                 <Text style={styles.statKeyTextStyle}>
                   {capitalizeFirstLetter(item.stat.name)}
                 </Text>
                 <Text style={styles.statValueTextStyle}>{item.base_stat}</Text>
-              </View>
+              </Animatable.View>
             )}
           />
         </View>
