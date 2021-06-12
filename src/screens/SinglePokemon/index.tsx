@@ -77,7 +77,10 @@ const SinglePokemon = ({ route }: Props) => {
           <Text style={styles.nameTextStyle}>
             {capitalizeFirstLetter(pokemon.name)}
           </Text>
-          <Swiper contentContainerStyle={{ width: "100", height: "100%" }}>
+          <Swiper
+            contentContainerStyle={{ width: "100", height: "100%" }}
+            loop={false}
+          >
             <Image
               source={{
                 uri: pokemon?.sprites?.front_default,
