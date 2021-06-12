@@ -6,52 +6,26 @@ import PokemonCard from "./PokemonCard";
 import styles from "./styles";
 import Search from "react-native-search-box";
 import colors from "styles/palette";
+import useFetch from "hooks/useFetch";
 
 const _keyExtractor = ({ id }: any, index: any) => `pokemon_${id}_${index}`;
 const _renderItem = ({ item, index }: any) => {
   return <PokemonCard index={index} pokemon={item} />;
 };
 
-const limit = 5;
+const LIMIT = 5;
 const Pokemons = () => {
   const searchBarRef = useRef(null);
-  const [pokemons, setPokemons] = useState<string[]>([]);
-  const [refreshing, setRefreshing] = useState(false);
-  const [page, setPage] = useState(1);
+
   const [search, setSearch] = useState("");
-
-  const onRefresh = useCallback(async () => {
-    try {
-      setRefreshing(true);
-      const { data } = await getPokemons({
-        params: { limit },
-      });
-      const { results } = data || {};
-      setPage(2);
-      setRefreshing(false);
-      if (results) setPokemons(results);
-    } catch (e) {
-      setPokemons([]);
-      setRefreshing(false);
-    }
-  }, [page]);
-
-  const retrievePokemons = useCallback(async () => {
-    if (search) return;
-    try {
-      setRefreshing(true);
-      const { data } = await getPokemons({
-        params: { limit, offset: limit * page },
-      });
-      const { results } = data || {};
-      setPage((prevPage) => prevPage + 1);
-      setRefreshing(false);
-      if (results) setPokemons((prevPokemons) => [...prevPokemons, ...results]);
-    } catch (e) {
-      setPokemons([]);
-      setRefreshing(false);
-    }
-  }, [page, search]);
+  const {
+    data: pokemons,
+    loading,
+    setData: setPokemons,
+    setLoading,
+    onRefresh,
+    onRequest,
+  } = useFetch(getPokemons, { paginated: true, limit: LIMIT });
 
   const onDeleteCancel = useCallback(() => {
     setSearch("");
@@ -59,21 +33,21 @@ const Pokemons = () => {
   }, []);
 
   const onSearch = useCallback((searchText: string) => {
-    setRefreshing(true);
+    setLoading(true);
     return new Promise(async () => {
       try {
-        const { data } = await getPokemonByName(searchText);
-        setRefreshing(false);
+        const { data } = await getPokemonByName(searchText?.toLowerCase());
+        setLoading(false);
         setPokemons([data]);
       } catch (e) {
         setPokemons([]);
-        setRefreshing(false);
+        setLoading(false);
       }
     });
   }, []);
 
   useEffect(() => {
-    retrievePokemons();
+    onRequest();
   }, []);
 
   return (
@@ -93,7 +67,7 @@ const Pokemons = () => {
         backgroundColor={colors.secondary}
       />
       <FlatList
-        refreshing={refreshing}
+        refreshing={loading}
         onRefresh={onRefresh}
         keyExtractor={_keyExtractor}
         data={pokemons}
@@ -101,7 +75,7 @@ const Pokemons = () => {
         initialNumToRender={10}
         maxToRenderPerBatch={5}
         onEndReachedThreshold={0.1}
-        onEndReached={retrievePokemons}
+        onEndReached={onRequest}
       />
     </SafeAreaView>
   );
