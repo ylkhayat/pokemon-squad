@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
   nameTextStyle: {
     position: "absolute",
-    top: 0,
+    top: 20,
     letterSpacing: 2.5,
     fontSize: 30,
     fontFamily: "Pokemon-Solid",
@@ -83,16 +83,18 @@ const styles = StyleSheet.create({
     bottom: 5,
     left: 5,
     backgroundColor: colors.white,
-    borderRadius: 7,
+    borderRadius: 10,
     padding: 7,
+    alignItems: "center",
   },
   newAudioContainer: {
     position: "absolute",
     bottom: 5,
     right: 5,
     backgroundColor: colors.white,
-    borderRadius: 7,
+    borderRadius: 10,
     padding: 7,
+    alignItems: "center",
   },
 });
 

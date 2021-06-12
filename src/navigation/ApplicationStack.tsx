@@ -9,7 +9,11 @@ const Stack = createStackNavigator();
 const AppStack = () => (
   <Stack.Navigator initialRouteName="landing" headerMode="none">
     <Stack.Screen name="landing" component={Landing} />
-    <Stack.Screen name="pokemons" component={Pokemons} />
+    <Stack.Screen
+      name="pokemons"
+      component={Pokemons}
+      options={{ gestureEnabled: false }}
+    />
     <Stack.Screen name="single_pokemon" component={SinglePokemon} />
   </Stack.Navigator>
 );
