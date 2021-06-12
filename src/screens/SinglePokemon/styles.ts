@@ -28,17 +28,17 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   imageStyle: {
-    flex: 1,
+    width: "100%",
+    height: height * 0.6,
   },
   swiperImageStyle: {
     height: 200,
     width: "100%",
   },
   content1Style: {
-    width: "70%",
+    width: "100%",
     padding: 10,
     borderRadius: 10,
-    flexDirection: "row",
     justifyContent: "space-between",
   },
   content2Style: {
@@ -71,6 +71,27 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: "Poppins-Light",
     color: colors.white,
+  },
+  statContainer: {
+    flexDirection: "row",
+    flex: 1,
+    marginHorizontal: 10,
+    marginVertical: 5,
+    justifyContent: "space-between",
+  },
+  statKeyTextStyle: {
+    fontSize: 16,
+    fontFamily: "Poppins-Light",
+    color: backgroundColors[1],
+  },
+  statValueTextStyle: {
+    fontSize: 16,
+    fontFamily: "Poppins-Light",
+    backgroundColor: backgroundColors[1],
+    color: colors.white,
+    paddingHorizontal: 3,
+    borderRadius: 7,
+    marginLeft: 10,
   },
   detailsTextStyle: {
     fontSize: 16,

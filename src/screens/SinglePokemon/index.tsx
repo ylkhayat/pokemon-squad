@@ -5,16 +5,17 @@ import {
   Text,
   TouchableWithoutFeedback,
   ActivityIndicator,
+  FlatList,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "./styles";
 import { Ionicons } from "@expo/vector-icons";
-import colors from "styles/palette";
 
 import { Audio } from "expo-av";
 import { getPokemonOldAudioUri, getPokemonNewAudioUri } from "network/pokemons";
 import Header from "./Header";
 import { capitalizeFirstLetter } from "utils";
+import Swiper from "react-native-swiper";
 
 type Props = {
   route: any;
@@ -69,11 +70,22 @@ const SinglePokemon = ({ route }: Props) => {
           <Text style={styles.nameTextStyle}>
             {capitalizeFirstLetter(pokemon.name)}
           </Text>
-          <Image
-            source={{ uri: pokemon?.sprites?.front_default }}
-            resizeMode="contain"
-            style={styles.imageStyle}
-          />
+          <Swiper contentContainerStyle={{ width: "100", height: "100%" }}>
+            <Image
+              source={{
+                uri: pokemon?.sprites?.front_default,
+              }}
+              resizeMode="contain"
+              style={styles.imageStyle}
+            />
+            <Image
+              source={{
+                uri: pokemon?.sprites?.back_default,
+              }}
+              resizeMode="contain"
+              style={styles.imageStyle}
+            />
+          </Swiper>
           <TouchableWithoutFeedback onPress={onPlayOldSound} disabled={loading}>
             <View style={styles.oldAudioContainer}>
               <Text style={[styles.detailsTextStyle, { color: pokemonColor }]}>
@@ -100,13 +112,23 @@ const SinglePokemon = ({ route }: Props) => {
           </TouchableWithoutFeedback>
         </View>
         <View style={styles.content1Style}>
-          <Text style={styles.headerTextStyle}>Pokemon Specie</Text>
-          <View style={styles.specieContainerStyle}>
-            <Text style={styles.valueTextStyle}>{pokemon.species.name}</Text>
-          </View>
+          <Text style={styles.headerTextStyle}>Pokemon Stats</Text>
+
+          <FlatList
+            data={pokemon.stats}
+            numColumns={2}
+            renderItem={({ item, index }) => (
+              <View key={item.stat.name} style={styles.statContainer}>
+                <Text style={styles.statKeyTextStyle}>
+                  {capitalizeFirstLetter(item.stat.name)}
+                </Text>
+                <Text style={styles.statValueTextStyle}>{item.base_stat}</Text>
+              </View>
+            )}
+          />
         </View>
         <View style={styles.content2Style}>
-          <Text style={styles.headerTextStyle}>Champ Abilities ⚔️</Text>
+          <Text style={styles.headerTextStyle}>Champ Abilities</Text>
           <View style={{ flexDirection: "row" }}>
             {pokemon.types?.map(({ type: { name } }) => (
               <View key={name} style={styles.typeContainerStyle}>
