@@ -11,6 +11,7 @@ import {
   TextInput,
   TouchableOpacity,
   FlatList,
+  Keyboard,
   FlatListProps,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -53,6 +54,7 @@ const Pokemons = () => {
     onRefresh();
     setSearchFocused(false);
     setSearchResult(false);
+    Keyboard.dismiss();
   }, []);
 
   const onSearch = useCallback((searchText: string) => {
@@ -74,6 +76,8 @@ const Pokemons = () => {
   const FLATLIST_PROPS: Partial<FlatListProps<string>> = useMemo(
     () => ({
       keyExtractor: (_, idx) => `${idx}`,
+      initialNumToRender: 10,
+      maxToRenderPerBatch: 5,
       renderItem: ({ item }) => (
         <TouchableOpacity
           onPress={() => {
@@ -122,6 +126,7 @@ const Pokemons = () => {
                   {...props}
                   style={styles.textInputStyle}
                   onFocus={() => setSearchFocused(true)}
+                  placeholder="Need a help searching? Enter a name! 🕶️"
                 />
 
                 {(!!search || searchFocused) && (

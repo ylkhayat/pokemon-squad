@@ -17,4 +17,5 @@ export const backgroundColors = [
   "#21B20C",
 ];
 
+export const gradeColors = ["#69B34C", "#FF8E15", "#FF0D0D"];
 export default colors;

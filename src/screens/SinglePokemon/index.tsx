@@ -16,9 +16,16 @@ import { getPokemonOldAudioUri, getPokemonNewAudioUri } from "network/pokemons";
 import Header from "./Header";
 import { capitalizeFirstLetter } from "utils";
 import Swiper from "react-native-swiper";
+import { gradeColors } from "styles/palette";
 
 type Props = {
   route: any;
+};
+
+const gradePicker = (stat: number) => {
+  if (stat <= 45) return gradeColors[0];
+  if (stat <= 90) return gradeColors[1];
+  else return gradeColors[2];
 };
 
 const SinglePokemon = ({ route }: Props) => {
@@ -128,7 +135,14 @@ const SinglePokemon = ({ route }: Props) => {
                 <Text style={styles.statKeyTextStyle}>
                   {capitalizeFirstLetter(item.stat.name)}
                 </Text>
-                <Text style={styles.statValueTextStyle}>{item.base_stat}</Text>
+                <Text
+                  style={[
+                    styles.statValueTextStyle,
+                    { backgroundColor: gradePicker(item.base_stat) },
+                  ]}
+                >
+                  {item.base_stat}
+                </Text>
               </Animatable.View>
             )}
           />
