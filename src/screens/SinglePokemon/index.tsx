@@ -36,24 +36,32 @@ const SinglePokemon = ({ route }: Props) => {
     useState<Audio.Sound | undefined>(undefined);
   const [newCachedSound, setNewCachedSound] =
     useState<Audio.Sound | undefined>(undefined);
-  const [loading, setLoading] = useState(false);
+  const [loadingOld, setLoadingOld] = useState(false);
+  const [loadingNew, setLoadingNew] = useState(false);
 
   const onPlayOldSound = useCallback(async () => {
-    setLoading(true);
+    setLoadingOld(true);
     controls.onVolumeChange(0.2);
-    const { sound } = await Audio.Sound.createAsync(
+    const { sound, status } = await Audio.Sound.createAsync(
       {
         uri: getPokemonOldAudioUri(pokemon?.id),
       },
       { shouldPlay: true }
     );
-    setLoading(false);
+    sound.setOnPlaybackStatusUpdate((playbackStatus) => {
+      if (!playbackStatus.isLoaded) {
+      } else {
+        if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
+          setTimeout(() => controls.onVolumeChange(1), 500);
+          setLoadingOld(false);
+        }
+      }
+    });
     setOldCachedSound(sound);
-    setTimeout(() => controls.onVolumeChange(1), 500);
   }, [oldCachedSound, pokemon]);
 
   const onPlayNewSound = useCallback(async () => {
-    setLoading(true);
+    setLoadingNew(true);
     controls.onVolumeChange(0.2);
 
     const { sound } = await Audio.Sound.createAsync(
@@ -62,9 +70,16 @@ const SinglePokemon = ({ route }: Props) => {
       },
       { shouldPlay: true }
     );
-    setLoading(false);
+    sound.setOnPlaybackStatusUpdate((playbackStatus) => {
+      if (!playbackStatus.isLoaded) {
+      } else {
+        if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
+          setTimeout(() => controls.onVolumeChange(1), 500);
+          setLoadingNew(false);
+        }
+      }
+    });
     setNewCachedSound(sound);
-    setTimeout(() => controls.onVolumeChange(1), 500);
   }, [oldCachedSound, pokemon]);
 
   useEffect(() => {
@@ -103,24 +118,30 @@ const SinglePokemon = ({ route }: Props) => {
               style={styles.imageStyle}
             />
           </Swiper>
-          <TouchableWithoutFeedback onPress={onPlayOldSound} disabled={loading}>
+          <TouchableWithoutFeedback
+            onPress={onPlayOldSound}
+            disabled={loadingOld || loadingNew}
+          >
             <View style={styles.oldAudioContainer}>
               <Text style={[styles.detailsTextStyle, { color: pokemonColor }]}>
                 Old
               </Text>
-              {loading ? (
+              {loadingOld ? (
                 <ActivityIndicator color={pokemonColor} size={40} />
               ) : (
                 <Ionicons name={"play"} color={pokemonColor} size={40} />
               )}
             </View>
           </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback onPress={onPlayNewSound} disabled={loading}>
+          <TouchableWithoutFeedback
+            onPress={onPlayNewSound}
+            disabled={loadingOld || loadingNew}
+          >
             <View style={styles.newAudioContainer}>
               <Text style={[styles.detailsTextStyle, { color: pokemonColor }]}>
                 New
               </Text>
-              {loading ? (
+              {loadingNew ? (
                 <ActivityIndicator color={pokemonColor} size={40} />
               ) : (
                 <Ionicons name={"play"} color={pokemonColor} size={40} />

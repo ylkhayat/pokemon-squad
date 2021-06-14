@@ -1,6 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Landing from "screens/Landing";
+import Setup from "screens/Setup";
 import Pokemons from "screens/Pokemons";
 import SinglePokemon from "screens/SinglePokemon";
 import useBackgroundTrack from "hooks/useBackgroundTrack";
@@ -14,6 +15,7 @@ const AppStack = () => {
     <BackgroundTrackContext.Provider value={controls}>
       <Stack.Navigator initialRouteName="landing" headerMode="none">
         <Stack.Screen name="landing" component={Landing} />
+        <Stack.Screen name="setup" component={Setup} />
         <Stack.Screen
           name="pokemons"
           component={Pokemons}

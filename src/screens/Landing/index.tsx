@@ -21,7 +21,7 @@ const Landing = () => {
   useEffect(() => {
     runTimer();
     if (fontsLoaded && timesUp) {
-      navigate("pokemons");
+      navigate("setup");
     }
   }, [fontsLoaded, timesUp]);
 

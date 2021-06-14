@@ -12,7 +12,7 @@ const useBackgroundTrack = () => {
     setIsPlaying(true);
     const { sound } = await Audio.Sound.createAsync(
       require("@assets/sounds/pokemon.mp3"),
-      { shouldPlay: true, isLooping: true }
+      { shouldPlay: false, isLooping: true }
     );
     setOldCachedSound(sound);
   }, []);
