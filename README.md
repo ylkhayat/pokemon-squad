@@ -49,6 +49,10 @@ And as a bonus, you will find included the Pokemon's cry, both old and new throu
 - Old - `https://pokemoncries.com/cries-old/{{id}}.mp3`
 - New - `https://pokemoncries.com/cries/{{id}}.mp3`
 
+#### 🎵 Added a background music
+
+Thanks to [Youtube: Jason Paige](https://www.youtube.com/watch?v=fCkeLBGSINs&ab_channel=JasonPaige), we've a background music for our application now!
+
 ### 🧪 Tests
 
 Tests for this application will be included soon.
