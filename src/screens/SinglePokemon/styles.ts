@@ -10,6 +10,9 @@ const styles = StyleSheet.create({
   headerContainer: {
     paddingVertical: 7,
     paddingHorizontal: 12,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   imageContainer: {
     width: "90%",

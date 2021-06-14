@@ -10,6 +10,7 @@ module.exports = function (api) {
           alias: {
             "@package": "./package.json",
             "@fonts": "./assets/fonts",
+            "@assets": "./assets",
           },
 
           extensions: [

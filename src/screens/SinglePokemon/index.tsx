@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import {
   View,
   Image,
@@ -17,6 +17,7 @@ import Header from "./Header";
 import { capitalizeFirstLetter } from "utils";
 import Swiper from "react-native-swiper";
 import { gradeColors } from "styles/palette";
+import BackgroundTrackContext from "hooks/useBackgroundTrack/BackgroundTrackContext";
 
 type Props = {
   route: any;
@@ -29,6 +30,7 @@ const gradePicker = (stat: number) => {
 };
 
 const SinglePokemon = ({ route }: Props) => {
+  const controls = useContext(BackgroundTrackContext);
   const { pokemon, pokemonColor } = route?.params;
   const [oldCachedSound, setOldCachedSound] =
     useState<Audio.Sound | undefined>(undefined);
@@ -38,6 +40,7 @@ const SinglePokemon = ({ route }: Props) => {
 
   const onPlayOldSound = useCallback(async () => {
     setLoading(true);
+    controls.onVolumeChange(0.2);
     const { sound } = await Audio.Sound.createAsync(
       {
         uri: getPokemonOldAudioUri(pokemon?.id),
@@ -46,10 +49,13 @@ const SinglePokemon = ({ route }: Props) => {
     );
     setLoading(false);
     setOldCachedSound(sound);
+    setTimeout(() => controls.onVolumeChange(1), 500);
   }, [oldCachedSound, pokemon]);
 
   const onPlayNewSound = useCallback(async () => {
     setLoading(true);
+    controls.onVolumeChange(0.2);
+
     const { sound } = await Audio.Sound.createAsync(
       {
         uri: getPokemonNewAudioUri(pokemon?.id),
@@ -58,6 +64,7 @@ const SinglePokemon = ({ route }: Props) => {
     );
     setLoading(false);
     setNewCachedSound(sound);
+    setTimeout(() => controls.onVolumeChange(1), 500);
   }, [oldCachedSound, pokemon]);
 
   useEffect(() => {
