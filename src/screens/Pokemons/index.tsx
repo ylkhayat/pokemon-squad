@@ -1,5 +1,6 @@
 import React, {
   useCallback,
+  useContext,
   useEffect,
   useMemo,
   useRef,
@@ -13,6 +14,7 @@ import {
   FlatList,
   Keyboard,
   FlatListProps,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { getPokemons, getPokemonByName } from "network/pokemons";
@@ -23,6 +25,7 @@ import colors from "styles/palette";
 import useFetch from "hooks/useFetch";
 import pokemon from "pokemon";
 import { Ionicons } from "@expo/vector-icons";
+import BackgroundTrackContext from "hooks/useBackgroundTrack/BackgroundTrackContext";
 
 const _keyExtractor = ({ id }: any, index: any) => `pokemon_${id}_${index}`;
 const _renderItem = ({ item, index }: any) => {
@@ -100,13 +103,30 @@ const Pokemons = () => {
   useEffect(() => {
     onRequest();
   }, []);
-
+  const controls = useContext(BackgroundTrackContext);
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ paddingHorizontal: 20 }}>
-        <View style={{ padding: 20 }}>
-          <Text style={styles.headerText}>MEET YOUR POKIES 🌱</Text>
-        </View>
+      <View
+        style={{
+          paddingHorizontal: 20,
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Text style={styles.headerText}>MEET YOUR POKIES 🌱</Text>
+
+        <TouchableWithoutFeedback
+          onPress={controls.isPlaying ? controls.onStop : controls.onPlay}
+        >
+          <View>
+            <Ionicons
+              name={controls.isPlaying ? "stop-circle" : "play-circle"}
+              color={colors.primary}
+              size={50}
+            />
+          </View>
+        </TouchableWithoutFeedback>
       </View>
       <View style={{ flex: 1 }}>
         <View style={styles.autocompleteContainer}>
