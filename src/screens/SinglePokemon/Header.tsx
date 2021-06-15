@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { View, TouchableWithoutFeedback } from "react-native";
+import { View, Text, TouchableWithoutFeedback } from "react-native";
 import { goBack } from "navigation/RootNavigation";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "styles/palette";
@@ -21,11 +21,14 @@ const Header = () => {
       <TouchableWithoutFeedback
         onPress={controls.isPlaying ? controls.onStop : controls.onPlay}
       >
-        <Ionicons
-          name={controls.isPlaying ? "stop-circle" : "play-circle"}
-          color={colors.primary}
-          size={50}
-        />
+        <View style={{ flexDirection: "row" }}>
+          <Text>🎵</Text>
+          <Ionicons
+            name={controls.isPlaying ? "stop-circle" : "play-circle"}
+            color={colors.primary}
+            size={50}
+          />
+        </View>
       </TouchableWithoutFeedback>
     </View>
   );

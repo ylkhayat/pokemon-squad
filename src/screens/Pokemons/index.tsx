@@ -119,7 +119,8 @@ const Pokemons = () => {
         <TouchableWithoutFeedback
           onPress={controls.isPlaying ? controls.onStop : controls.onPlay}
         >
-          <View>
+          <View style={{ flexDirection: "row" }}>
+            <Text>🎵</Text>
             <Ionicons
               name={controls.isPlaying ? "stop-circle" : "play-circle"}
               color={colors.primary}
@@ -138,6 +139,7 @@ const Pokemons = () => {
             value={search}
             onChangeText={setSearch}
             flatListProps={FLATLIST_PROPS as any}
+            listStyle={styles.autocompleteListContainer}
             listContainerStyle={styles.autocompleteListContainer}
             renderTextInput={(props: any) => (
               <View style={styles.textInputContainer}>

@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
     height: height(20),
     margin: 5,
     borderRadius: 10,
-    flex: 1,
     left: 0,
     position: "absolute",
     right: 0,
